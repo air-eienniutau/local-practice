@@ -73,7 +73,7 @@ class Turntable {
     ctx.clearRect(0, 0, 300, 300);
     ctx.save();
     ctx.translate(150,150);
-    let base_dev = -0.5*this.prizeSet[0].deg*__2PI;
+    let base_dev = this.baseDev;
     let table_dev = dev - 0.25*__2PI + base_dev;
     for(let i=0; i<this.prizeSet.length; i++) {
       let pSet = this.prizeSet[i];

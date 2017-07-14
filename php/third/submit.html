@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input class="name" name="name" type="text"/>
+<input class="kana" name="kana" type="text"/>
+<input class="shiptype" name="shiptype" type="text"/>
+<button class="post">click</button>
+</body>
+<script>
+    "use strict";
+    let $ = function(str){
+      return document.querySelector(str);
+    };
+    let sendData = function() {
+
+      let xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+      let url = `deal.php?name=${$('.name').value}&kana=${$('.kana').value}&shiptype=${$('.shiptype').value}`;
+      xhr.open("GET", url, true);
+      xhr.setRequestHeader("Accept","application/json, text/javascript, */*");
+      xhr.onreadystatechange = function() {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+          let response = xhr.responseText;
+          let data = eval('(' + response + ')');
+          console.log(response, data);
+        }
+      };
+      xhr.send();
+    };
+    $('.post').addEventListener('click', function(){
+      sendData();
+    });
+</script>
+</html>
